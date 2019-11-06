@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youjiuye.cust.mapper.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.youjiuye.cust.bean.Customer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comname" property="comname" jdbcType="VARCHAR" />
+    <result column="companyperson" property="companyperson" jdbcType="VARCHAR" />
+    <result column="comaddress" property="comaddress" jdbcType="VARCHAR" />
+    <result column="comphone" property="comphone" jdbcType="VARCHAR" />
+    <result column="camera" property="camera" jdbcType="VARCHAR" />
+    <result column="present" property="present" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, comname, companyperson, comaddress, comphone, camera, present, remark, addtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.youjiuye.cust.bean.CustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youjiuye.cust.bean.CustomerExample" >
+    delete from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youjiuye.cust.bean.Customer" >
+    insert into customer (id, comname, companyperson, 
+      comaddress, comphone, camera, 
+      present, remark, addtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{comname,jdbcType=VARCHAR}, #{companyperson,jdbcType=VARCHAR}, 
+      #{comaddress,jdbcType=VARCHAR}, #{comphone,jdbcType=VARCHAR}, #{camera,jdbcType=VARCHAR}, 
+      #{present,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{addtime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiuye.cust.bean.Customer" >
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="comname != null" >
+        comname,
+      </if>
+      <if test="companyperson != null" >
+        companyperson,
+      </if>
+      <if test="comaddress != null" >
+        comaddress,
+      </if>
+      <if test="comphone != null" >
+        comphone,
+      </if>
+      <if test="camera != null" >
+        camera,
+      </if>
+      <if test="present != null" >
+        present,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="comname != null" >
+        #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyperson != null" >
+        #{companyperson,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddress != null" >
+        #{comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comphone != null" >
+        #{comphone,jdbcType=VARCHAR},
+      </if>
+      <if test="camera != null" >
+        #{camera,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youjiuye.cust.bean.CustomerExample" resultType="java.lang.Integer" >
+    select count(*) from customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.comname != null" >
+        comname = #{record.comname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyperson != null" >
+        companyperson = #{record.companyperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comaddress != null" >
+        comaddress = #{record.comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comphone != null" >
+        comphone = #{record.comphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.camera != null" >
+        camera = #{record.camera,jdbcType=VARCHAR},
+      </if>
+      <if test="record.present != null" >
+        present = #{record.present,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        addtime = #{record.addtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer
+    set id = #{record.id,jdbcType=INTEGER},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      companyperson = #{record.companyperson,jdbcType=VARCHAR},
+      comaddress = #{record.comaddress,jdbcType=VARCHAR},
+      comphone = #{record.comphone,jdbcType=VARCHAR},
+      camera = #{record.camera,jdbcType=VARCHAR},
+      present = #{record.present,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      addtime = #{record.addtime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiuye.cust.bean.Customer" >
+    update customer
+    <set >
+      <if test="comname != null" >
+        comname = #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="companyperson != null" >
+        companyperson = #{companyperson,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddress != null" >
+        comaddress = #{comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comphone != null" >
+        comphone = #{comphone,jdbcType=VARCHAR},
+      </if>
+      <if test="camera != null" >
+        camera = #{camera,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        present = #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiuye.cust.bean.Customer" >
+    update customer
+    set comname = #{comname,jdbcType=VARCHAR},
+      companyperson = #{companyperson,jdbcType=VARCHAR},
+      comaddress = #{comaddress,jdbcType=VARCHAR},
+      comphone = #{comphone,jdbcType=VARCHAR},
+      camera = #{camera,jdbcType=VARCHAR},
+      present = #{present,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youjiuye.usual.mapper.BaoXiaoMapper" >
+  <resultMap id="BaseResultMap" type="com.youjiuye.usual.bean.BaoXiao" >
+    <id column="bxid" property="bxid" jdbcType="VARCHAR" />
+    <result column="paymode" property="paymode" jdbcType="VARCHAR" />
+    <result column="totalmoney" property="totalmoney" jdbcType="DOUBLE" />
+    <result column="bxtime" property="bxtime" jdbcType="DATE" />
+    <result column="bxremark" property="bxremark" jdbcType="VARCHAR" />
+    <result column="bxstatus" property="bxstatus" jdbcType="INTEGER" />
+    <result column="emp_fk" property="empFk" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bxid, paymode, totalmoney, bxtime, bxremark, bxstatus, emp_fk, result
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.youjiuye.usual.bean.BaoXiaoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from baoxiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from baoxiao
+    where bxid = #{bxid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from baoxiao
+    where bxid = #{bxid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youjiuye.usual.bean.BaoXiaoExample" >
+    delete from baoxiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youjiuye.usual.bean.BaoXiao" >
+    insert into baoxiao (bxid, paymode, totalmoney, 
+      bxtime, bxremark, bxstatus, 
+      emp_fk, result)
+    values (#{bxid,jdbcType=VARCHAR}, #{paymode,jdbcType=VARCHAR}, #{totalmoney,jdbcType=DOUBLE}, 
+      #{bxtime,jdbcType=DATE}, #{bxremark,jdbcType=VARCHAR}, #{bxstatus,jdbcType=INTEGER}, 
+      #{empFk,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiuye.usual.bean.BaoXiao" >
+    insert into baoxiao
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bxid != null" >
+        bxid,
+      </if>
+      <if test="paymode != null" >
+        paymode,
+      </if>
+      <if test="totalmoney != null" >
+        totalmoney,
+      </if>
+      <if test="bxtime != null" >
+        bxtime,
+      </if>
+      <if test="bxremark != null" >
+        bxremark,
+      </if>
+      <if test="bxstatus != null" >
+        bxstatus,
+      </if>
+      <if test="empFk != null" >
+        emp_fk,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bxid != null" >
+        #{bxid,jdbcType=VARCHAR},
+      </if>
+      <if test="paymode != null" >
+        #{paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        #{totalmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="bxtime != null" >
+        #{bxtime,jdbcType=DATE},
+      </if>
+      <if test="bxremark != null" >
+        #{bxremark,jdbcType=VARCHAR},
+      </if>
+      <if test="bxstatus != null" >
+        #{bxstatus,jdbcType=INTEGER},
+      </if>
+      <if test="empFk != null" >
+        #{empFk,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youjiuye.usual.bean.BaoXiaoExample" resultType="java.lang.Integer" >
+    select count(*) from baoxiao
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update baoxiao
+    <set >
+      <if test="record.bxid != null" >
+        bxid = #{record.bxid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymode != null" >
+        paymode = #{record.paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalmoney != null" >
+        totalmoney = #{record.totalmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bxtime != null" >
+        bxtime = #{record.bxtime,jdbcType=DATE},
+      </if>
+      <if test="record.bxremark != null" >
+        bxremark = #{record.bxremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bxstatus != null" >
+        bxstatus = #{record.bxstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.empFk != null" >
+        emp_fk = #{record.empFk,jdbcType=INTEGER},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update baoxiao
+    set bxid = #{record.bxid,jdbcType=VARCHAR},
+      paymode = #{record.paymode,jdbcType=VARCHAR},
+      totalmoney = #{record.totalmoney,jdbcType=DOUBLE},
+      bxtime = #{record.bxtime,jdbcType=DATE},
+      bxremark = #{record.bxremark,jdbcType=VARCHAR},
+      bxstatus = #{record.bxstatus,jdbcType=INTEGER},
+      emp_fk = #{record.empFk,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiuye.usual.bean.BaoXiao" >
+    update baoxiao
+    <set >
+      <if test="paymode != null" >
+        paymode = #{paymode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null" >
+        totalmoney = #{totalmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="bxtime != null" >
+        bxtime = #{bxtime,jdbcType=DATE},
+      </if>
+      <if test="bxremark != null" >
+        bxremark = #{bxremark,jdbcType=VARCHAR},
+      </if>
+      <if test="bxstatus != null" >
+        bxstatus = #{bxstatus,jdbcType=INTEGER},
+      </if>
+      <if test="empFk != null" >
+        emp_fk = #{empFk,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bxid = #{bxid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiuye.usual.bean.BaoXiao" >
+    update baoxiao
+    set paymode = #{paymode,jdbcType=VARCHAR},
+      totalmoney = #{totalmoney,jdbcType=DOUBLE},
+      bxtime = #{bxtime,jdbcType=DATE},
+      bxremark = #{bxremark,jdbcType=VARCHAR},
+      bxstatus = #{bxstatus,jdbcType=INTEGER},
+      emp_fk = #{empFk,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR}
+    where bxid = #{bxid,jdbcType=VARCHAR}
+  </update>
+</mapper>

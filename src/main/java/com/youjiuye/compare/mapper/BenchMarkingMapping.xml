@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youjiuye.compare.mapper.BenchMarkingMapping" >
+
+    <insert id="insertBench">
+        insert into benchemarking values (null,#{companyName},#{salesAmount},#{year},#{business},#{priority},#{disadvantage},#{status},#{empCount},#{createTime},#{simpleDesc})
+    </insert>
+
+    <select id="selectChart" resultType="com.youjiuye.compare.bean.BenchMarking">
+        SELECT id,company_name companyName,sales_amount salesAmount
+        FROM benchemarking
+        WHERE `year` = #{year}
+    </select>
+</mapper>

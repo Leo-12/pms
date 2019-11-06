@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.youjiuye.sys.mapper.ArchivesMapper" >
+  <resultMap id="BaseResultMap" type="com.youjiuye.sys.bean.Archives" >
+    <id column="dnum" property="dnum" jdbcType="VARCHAR" />
+    <result column="landline" property="landline" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR" />
+    <result column="sosperson" property="sosperson" jdbcType="VARCHAR" />
+    <result column="biyedate" property="biyedate" jdbcType="DATE" />
+    <result column="zzmm" property="zzmm" jdbcType="VARCHAR" />
+    <result column="minzu" property="minzu" jdbcType="VARCHAR" />
+    <result column="xueli" property="xueli" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="emp_fk" property="empFk" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="hirdate" property="hirdate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dnum, landline, school, zhuanye, sosperson, biyedate, zzmm, minzu, xueli, email, 
+    emp_fk, remark, hirdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.youjiuye.sys.bean.ArchivesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from archives
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from archives
+    where dnum = #{dnum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from archives
+    where dnum = #{dnum,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.youjiuye.sys.bean.ArchivesExample" >
+    delete from archives
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.youjiuye.sys.bean.Archives" >
+    insert into archives (dnum, landline, school, 
+      zhuanye, sosperson, biyedate, 
+      zzmm, minzu, xueli, 
+      email, emp_fk, remark, 
+      hirdate)
+    values (#{dnum,jdbcType=VARCHAR}, #{landline,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{zhuanye,jdbcType=VARCHAR}, #{sosperson,jdbcType=VARCHAR}, #{biyedate,jdbcType=DATE}, 
+      #{zzmm,jdbcType=VARCHAR}, #{minzu,jdbcType=VARCHAR}, #{xueli,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{empFk,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{hirdate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.youjiuye.sys.bean.Archives" >
+    insert into archives
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dnum != null" >
+        dnum,
+      </if>
+      <if test="landline != null" >
+        landline,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="zhuanye != null" >
+        zhuanye,
+      </if>
+      <if test="sosperson != null" >
+        sosperson,
+      </if>
+      <if test="biyedate != null" >
+        biyedate,
+      </if>
+      <if test="zzmm != null" >
+        zzmm,
+      </if>
+      <if test="minzu != null" >
+        minzu,
+      </if>
+      <if test="xueli != null" >
+        xueli,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="empFk != null" >
+        emp_fk,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="hirdate != null" >
+        hirdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dnum != null" >
+        #{dnum,jdbcType=VARCHAR},
+      </if>
+      <if test="landline != null" >
+        #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanye != null" >
+        #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="sosperson != null" >
+        #{sosperson,jdbcType=VARCHAR},
+      </if>
+      <if test="biyedate != null" >
+        #{biyedate,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null" >
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="minzu != null" >
+        #{minzu,jdbcType=VARCHAR},
+      </if>
+      <if test="xueli != null" >
+        #{xueli,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="empFk != null" >
+        #{empFk,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hirdate != null" >
+        #{hirdate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.youjiuye.sys.bean.ArchivesExample" resultType="java.lang.Integer" >
+    select count(*) from archives
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update archives
+    <set >
+      <if test="record.dnum != null" >
+        dnum = #{record.dnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landline != null" >
+        landline = #{record.landline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhuanye != null" >
+        zhuanye = #{record.zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sosperson != null" >
+        sosperson = #{record.sosperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.biyedate != null" >
+        biyedate = #{record.biyedate,jdbcType=DATE},
+      </if>
+      <if test="record.zzmm != null" >
+        zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minzu != null" >
+        minzu = #{record.minzu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xueli != null" >
+        xueli = #{record.xueli,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empFk != null" >
+        emp_fk = #{record.empFk,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hirdate != null" >
+        hirdate = #{record.hirdate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update archives
+    set dnum = #{record.dnum,jdbcType=VARCHAR},
+      landline = #{record.landline,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      zhuanye = #{record.zhuanye,jdbcType=VARCHAR},
+      sosperson = #{record.sosperson,jdbcType=VARCHAR},
+      biyedate = #{record.biyedate,jdbcType=DATE},
+      zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      minzu = #{record.minzu,jdbcType=VARCHAR},
+      xueli = #{record.xueli,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      emp_fk = #{record.empFk,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      hirdate = #{record.hirdate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youjiuye.sys.bean.Archives" >
+    update archives
+    <set >
+      <if test="landline != null" >
+        landline = #{landline,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanye != null" >
+        zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="sosperson != null" >
+        sosperson = #{sosperson,jdbcType=VARCHAR},
+      </if>
+      <if test="biyedate != null" >
+        biyedate = #{biyedate,jdbcType=DATE},
+      </if>
+      <if test="zzmm != null" >
+        zzmm = #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="minzu != null" >
+        minzu = #{minzu,jdbcType=VARCHAR},
+      </if>
+      <if test="xueli != null" >
+        xueli = #{xueli,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="empFk != null" >
+        emp_fk = #{empFk,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="hirdate != null" >
+        hirdate = #{hirdate,jdbcType=DATE},
+      </if>
+    </set>
+    where dnum = #{dnum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youjiuye.sys.bean.Archives" >
+    update archives
+    set landline = #{landline,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      sosperson = #{sosperson,jdbcType=VARCHAR},
+      biyedate = #{biyedate,jdbcType=DATE},
+      zzmm = #{zzmm,jdbcType=VARCHAR},
+      minzu = #{minzu,jdbcType=VARCHAR},
+      xueli = #{xueli,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      emp_fk = #{empFk,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      hirdate = #{hirdate,jdbcType=DATE}
+    where dnum = #{dnum,jdbcType=VARCHAR}
+  </update>
+</mapper>
